@@ -1,0 +1,36 @@
+generated: '2026-08-17'
+method: searched
+source: https://nap.launchmetrics.com/docs
+limit_count: 0
+limits: []
+headers: []
+status_on_exhaustion: null
+retry_after: false
+note: >-
+  Launchmetrics publishes no rate limits for the NAP APIs. All five service pages (Search, Documents,
+  Documents v2, Medias, Auditlogs) were read in full on 2026-08-17: the strings "rate limit",
+  "throttle", "quota", "429", "Retry-After", "requests per" and "X-RateLimit" do not appear anywhere in
+  the reference. The published error vocabulary contains no rate-limit-exceeded code — only
+  MISSING_PARAMETERS (400) and INTERNAL_ERROR (500). Live unauthenticated GETs of the /ping health
+  operations on search/v1, documents/v1 and medias/v1 returned 200 with no RateLimit-*, X-RateLimit-*
+  or Retry-After response headers.
+  An honest zero: an integrator has no published number to design against and no runtime signal to
+  back off on. Any limiting that exists is enforced silently, or is set per app_id at provisioning
+  time by Launchmetrics R&D and communicated out of band.
+evidence:
+- url: https://nap.launchmetrics.com/docs/search.html
+  status: 200
+  note: Full reference read; no rate-limit section.
+- url: https://nap.launchmetrics.com/docs/documents.html
+  status: 200
+  note: Full reference read; no rate-limit section.
+- url: https://nap.launchmetrics.com/docs/medias.html
+  status: 200
+  note: Full reference read; no rate-limit section.
+- url: https://nap.launchmetrics.com/search/v1/ping
+  status: 200
+  note: Live probe — no rate-limit headers on the response.
+observability_note: >-
+  The closest thing Launchmetrics publishes to a usage signal is GET /stats, documented on every
+  service, which returns per-operation call counts, status-code breakdowns and latency statistics over
+  the last 24 hours. That is a telemetry endpoint an integrator can poll, not a limit or a quota.

@@ -1,0 +1,151 @@
+generated: '2026-08-17'
+method: derived
+source: https://nap.launchmetrics.com/docs
+note: >-
+  Derived by reading the example request/response bodies published in the NAP reference. Launchmetrics
+  publishes no OpenAPI, so there are no components.schemas or $ref links to walk — every entity, field
+  and relationship below was read off a worked example in the HTML docs and is therefore a partial
+  view of the real model, not a complete schema. Field types are omitted where the docs do not state
+  them; nothing is guessed.
+entities:
+- name: document
+  description: >-
+    A publication — an article, post, video or other indexed piece of coverage. The central entity of
+    the Launchmetrics data model and the unit returned by both Search and Documents.
+  identifier: numeric string id (example ids are 20-digit values such as 14973462950408689474)
+  retrieved_by:
+  - GET /documents/{ids} (Documents v1, Documents v2)
+  - GET|POST /documents (Search)
+  observed_fields:
+  - provider
+  - date
+  - content
+  - title
+  - summary
+  - link
+  - url
+  - image
+  - original_image
+  - video_url
+  - language
+  - country_code
+  - location
+  - place
+  - coords
+  - keywords
+  - type_publication
+  - id_from_provider
+  - date_from_provider
+  - feeling
+  - cluster
+  - social
+  - author
+  - influencer_ids
+  representations:
+    parameter: response_type
+    known_values:
+    - analytics
+    note: >-
+      The reference demonstrates response_type=analytics, which returns a flattened analytics-shaped
+      document. Other accepted values are referenced but not enumerated in the docs.
+- name: author
+  description: >-
+    The account or byline behind a document. Embedded inside document rather than addressable on its
+    own endpoint.
+  observed_fields:
+  - id
+  - name
+  - url
+  - age
+  - contact_count
+  - subscriber_count
+  - subscription_count
+  - video_watch_count
+  - favourites_count
+  - tweets_count
+- name: social_metrics
+  description: Engagement counters attached to a document.
+  observed_fields:
+  - likes
+  - shares
+  - replies
+  - retweet_to_user
+  - user_mentions
+- name: media
+  description: >-
+    A media outlet — the publication vehicle rather than the piece of coverage. Split into online and
+    print corpora with separate search endpoints.
+  identifier: media id
+  retrieved_by:
+  - GET /medias/{ids}
+  - GET /medias/search
+  - GET /medias/print/search
+- name: influencer
+  description: >-
+    An influencer profile. Referenced from document via influencer_ids, and the Search API's
+    /search/v1/influencers endpoint is named in the Documents overview as the source whose results are
+    served from an Amazon-backed cache. The influencers endpoint itself is not separately documented.
+  identifier: influencer id
+- name: audit_log
+  description: An audit record scoped to a team, a group and an object.
+  identifier: composite (team, group, id)
+  retrieved_by:
+  - GET /auditlogs/{team}{group}{id}
+- name: facet
+  description: >-
+    An aggregation bucket over a document search — counts by channel type, topic path, language,
+    country or key phrase. Returned by /documents/facets, not independently addressable.
+relationships:
+- from: document
+  to: author
+  kind: has_one
+  via: author
+  evidence: author object embedded in the document response example
+- from: document
+  to: social_metrics
+  kind: has_one
+  via: social
+  evidence: social object embedded in the document response example
+- from: document
+  to: influencer
+  kind: has_many
+  via: influencer_ids
+  evidence: influencer_ids array on the document response example
+- from: document
+  to: media
+  kind: belongs_to
+  via: provider
+  evidence: >-
+    provider names the outlet or platform (e.g. "YouTube") on each document; the Medias API is the
+    outlet-level service. The join is by name/provider, not by an explicit media id on the document in
+    the published examples.
+- from: audit_log
+  to: document
+  kind: belongs_to
+  via: id
+  confidence: low
+  evidence: >-
+    The auditlogs path is /auditlogs/{team}{group}{id} where id is the audited object. The reference
+    does not say which object types are audited, so this edge is inferred from the path shape only.
+- from: facet
+  to: document
+  kind: aggregates
+  via: query
+  evidence: /documents/facets aggregates over the same query as /documents
+filter_dimensions:
+  note: >-
+    The Search API exposes these as *_filter parameters, which is the clearest published statement of
+    how documents are dimensioned.
+  dimensions:
+  - channel_type_id
+  - topic_paths
+  - language_id
+  - country_path
+  - key_phrases
+id_prefixes: []
+render: null
+gaps:
+- No schema, type or requiredness information is published for any field.
+- The full response_type value set is not enumerated.
+- The influencers endpoint is referenced but has no documentation page.
+- No relationship between document and the Insights/Media Impact Value scoring model is documented.

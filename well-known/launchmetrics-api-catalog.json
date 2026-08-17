@@ -1,0 +1,22 @@
+{
+    "linkset": [
+        {
+            "anchor": "https://careers.launchmetrics.com/jobs",
+            "service-desc": [
+                {
+                    "href": "https://careers.launchmetrics.com/jobs.json",
+                    "type": "application/feed+json"
+                },
+                {
+                    "href": "https://careers.launchmetrics.com/jobs.md",
+                    "type": "text/markdown"
+                }
+            ],
+            "service-doc": [
+                {
+                    "href": "https://docs.teamtailor.com/"
+                }
+            ]
+        }
+    ]
+}

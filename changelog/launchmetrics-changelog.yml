@@ -1,0 +1,50 @@
+generated: '2026-08-17'
+method: searched
+source: https://nap.launchmetrics.com/docs
+scheme: uri-path versioning
+current_version: v1 (v2 for the Documents service)
+entry_count: 0
+entries: []
+note: >-
+  Launchmetrics publishes no dated changelog or release-notes page for its APIs. The NAP reference at
+  nap.launchmetrics.com/docs is undated static HTML with no "what's new", no version history and no
+  per-service revision log; the only change signal in it is the inline sentence deprecating the appId
+  / appid parameter in favour of app_id, which carries no date.
+  The company does run a product-news section for its SaaS modules at
+  www.launchmetrics.com/resources/product-news, but (a) it covers product releases rather than API
+  changes, and (b) it could not be read on this pass — the marketing host is behind a SiteGround bot
+  challenge for our egress IP and returns HTTP 202 with a captcha stub on every path, including that
+  section and every RSS path tried.
+  Recorded as an honest zero: no dated API changelog was found anywhere reachable.
+evidence:
+- url: https://nap.launchmetrics.com/docs
+  status: 200
+  note: API index — five services, no changelog entry.
+- url: https://nap.launchmetrics.com/docs/changelog.html
+  status: 404
+- url: https://help.launchmetrics.com/en_US/release-notes
+  status: 404
+- url: https://www.launchmetrics.com/resources/product-news
+  status: 202
+  note: sg-captcha challenge stub — product news, not an API changelog, and unreadable from here.
+- url: https://www.launchmetrics.com/feed
+  status: 202
+  note: sg-captcha challenge stub.
+version_history_observed:
+- service: Documents
+  versions:
+  - v1
+  - v2
+  note: >-
+    v1 and v2 are documented as separate services on separate base paths and both are live; v1 is not
+    marked deprecated. This is the only observable version transition on the estate.
+- service: Search
+  versions:
+  - v1
+- service: Medias
+  versions:
+  - v1
+- service: Auditlogs
+  versions:
+  - v1
+  note: Documented, but GET /auditLogs/v1/ping returned 404 on 2026-08-17.

@@ -1,0 +1,25 @@
+generated: '2026-08-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: launchmetrics.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 27 23:59:59 2027 GMT
+  hsts: false
+- host: nap.launchmetrics.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 27 23:59:59 2027 GMT
+  hsts: null
+domains:
+- domain: launchmetrics.com
+  dnssec: false
+  caa:
+  - 0 issue "letsencrypt.org"
+  - 0 issue "amazon.com"
+  - 0 issue "certainly.com"
+  - 0 issue "digicert.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

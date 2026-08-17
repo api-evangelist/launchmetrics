@@ -1,0 +1,182 @@
+generated: '2026-08-17'
+method: probed
+source: live GET probes, 2026-08-17
+note: >-
+  Probed the RFC 8615 discovery surface on every Launchmetrics host reachable from apis.yml, the NAP
+  API bases, and the hosts named inside the Discover single-page-app bundle. Two caveats that matter
+  for reading the table below.
+  (1) www/apex launchmetrics.com is behind a SiteGround bot challenge for our egress IP: every path
+  returns HTTP 202 with an sg-captcha challenge redirect and a 169-200 byte HTML stub. Those are
+  recorded as challenged, not as hits.
+  (2) portal., discover. and discover-admin.launchmetrics.com are single-page apps whose catch-all
+  route answers 200 with the same HTML shell for every /.well-known/* path. Those are recorded as
+  spa-shell, not as hits — a 200 that returns an application shell is not a document.
+  The only real document found on the whole surface is the RFC 9727 api-catalog on the careers
+  subdomain, and its provenance is qualified below.
+hosts:
+- host: https://nap.launchmetrics.com
+  role: NAP API host (Search, Documents, Documents v2, Medias, Auditlogs)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://api-ter.launchmetrics.com
+  role: Tenant-scoped API host referenced by the Discover application bundle
+  documents:
+  - path: /.well-known/security.txt
+    status: 400
+    result: MISSING_TENANT
+  - path: /.well-known/openid-configuration
+    status: 400
+    result: MISSING_TENANT
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+    result: MISSING_TENANT
+  - path: /.well-known/agent-card.json
+    status: 400
+    result: MISSING_TENANT
+  - path: /.well-known/agent.json
+    status: 400
+    result: MISSING_TENANT
+  note: >-
+    This host routes every path through its tenant middleware, so the whole /.well-known/ namespace
+    answers 400 MISSING_TENANT rather than 404. No document is served anonymously.
+- host: https://launchmetrics.com
+  role: Marketing website
+  challenged: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 202
+    result: sg-captcha challenge (HTML stub, 195 bytes)
+  - path: /.well-known/openid-configuration
+    status: 202
+    result: sg-captcha challenge
+  - path: /.well-known/oauth-authorization-server
+    status: 202
+    result: sg-captcha challenge
+  - path: /.well-known/api-catalog
+    status: 202
+    result: sg-captcha challenge
+  - path: /.well-known/ai-plugin.json
+    status: 202
+    result: sg-captcha challenge
+  - path: /.well-known/agent-card.json
+    status: 202
+    result: sg-captcha challenge
+  - path: /.well-known/agent.json
+    status: 202
+    result: sg-captcha challenge
+  - path: /llms.txt
+    status: 202
+    result: sg-captcha challenge
+- host: https://portal.launchmetrics.com
+  role: Customer application switcher (SPA)
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: spa-shell (2408-byte HTML application shell, identical for every path)
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: spa-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: spa-shell
+  - path: /llms.txt
+    status: 200
+    result: spa-shell
+- host: https://discover.launchmetrics.com
+  role: Discover customer application (SPA)
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: spa-shell (2175-byte HTML application shell, identical for every path)
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: spa-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: spa-shell
+  - path: /llms.txt
+    status: 200
+    result: spa-shell
+- host: https://discover-admin.launchmetrics.com
+  role: Discover admin application (SPA)
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: spa-shell (2214-byte HTML application shell, identical for every path)
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: spa-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: spa-shell
+- host: https://events.launchmetrics.com
+  role: Events application
+  documents:
+  - path: /.well-known/security.txt
+    status: 302
+    result: redirect to /internal/index.php (401)
+  - path: /.well-known/agent-card.json
+    status: 302
+  - path: /.well-known/agent.json
+    status: 302
+- host: https://help.launchmetrics.com
+  role: Help centre (Helpjuice)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://careers.launchmetrics.com
+  role: Careers site (Teamtailor ATS on a Launchmetrics subdomain)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: application/linkset+json; charset=utf-8
+    file: launchmetrics-api-catalog.json
+    result: hit
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain
+    file: ../llms/launchmetrics-careers-llms.txt
+    result: hit
+  provenance: >-
+    Both documents are real, machine-readable and served from a host Launchmetrics controls, and both
+    describe Launchmetrics content (its own open positions). They are, however, generated by the
+    Teamtailor applicant-tracking platform rather than authored by Launchmetrics: the api-catalog's
+    own service-doc link points at https://docs.teamtailor.com/. The linkset advertises the careers
+    job feed (jobs.json as application/feed+json, jobs.md as text/markdown) — not the NAP APIs. Treat
+    this as a genuine but narrow discovery surface covering recruitment data only.
+summary:
+  hosts_probed: 9
+  real_documents_found: 2
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  agent_card: false
+  api_catalog: true
+  llms_txt: true
+  note: >-
+    No security.txt anywhere on the estate, no OAuth/OIDC discovery metadata (consistent with an API
+    that authenticates by app_id rather than OAuth), and no A2A agent card on any host or either
+    well-known path. Per pipeline rules no a2a/ artifact is written.

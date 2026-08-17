@@ -1,0 +1,80 @@
+generated: '2026-08-17'
+method: searched
+source: https://nap.launchmetrics.com/docs
+versioning:
+  scheme: uri-path
+  detail: >-
+    Every NAP service embeds a /v[:version] segment. The reference states v0 is the testing
+    environment (authentication disabled, and disabled in production) and v1 is the authenticated
+    production version. Documents runs v1 and v2 side by side on separate base paths, which is the
+    only observed multi-version service.
+  current:
+  - api: Launchmetrics Search API
+    version: v1
+    base: https://nap.launchmetrics.com/search/v1
+  - api: Launchmetrics Documents API
+    version: v1
+    base: https://nap.launchmetrics.com/documents/v1
+  - api: Launchmetrics Documents v2 API
+    version: v2
+    base: https://nap.launchmetrics.com/documents/v2
+  - api: Launchmetrics Medias API
+    version: v1
+    base: https://nap.launchmetrics.com/medias/v1
+  - api: Launchmetrics Auditlogs API
+    version: v1
+    base: https://nap.launchmetrics.com/auditLogs/v1
+  docs: https://nap.launchmetrics.com/docs
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  documented_deprecations:
+  - item: appId / appid authentication parameter
+    replacement: app_id
+    source: https://nap.launchmetrics.com/docs/documents.html
+    quote: The use of appId or appid is deprecated, use app_id instead
+    sunset_date: null
+  note: >-
+    Launchmetrics publishes no deprecation policy, no sunset schedule and no RFC 8594 Sunset/Deprecation
+    header support. The single deprecation notice above is an inline sentence in the Documents API
+    reference with no date attached. Documents v1 is not marked deprecated even though v2 exists. No
+    Deprecation pointer is emitted, because there is no policy to point at.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No published SLA or uptime commitment was found. The General Terms of Use at
+    connect.launchmetrics.com/Home/en/GeneralTerms contain no availability target.
+status_page:
+  url: https://status.launchmetrics.com/
+  provider: Instatus
+  public: false
+  http_status: 200
+  final_url: https://status.launchmetrics.com/login
+  probed: '2026-08-17'
+  note: >-
+    Launchmetrics operates a status page on its own subdomain (CNAME cname.instatus.com), but it is a
+    private Instatus page: an anonymous GET returns 200 and lands on /login. Incident history is
+    therefore visible to signed-in customers only, not to the public or to an agent.
+health_endpoints:
+  note: >-
+    In place of a public status page, each NAP service exposes unauthenticated liveness and telemetry
+    operations that an integrator can poll directly.
+  probed: '2026-08-17'
+  results:
+  - url: https://nap.launchmetrics.com/search/v1/ping
+    http_status: 200
+  - url: https://nap.launchmetrics.com/documents/v1/ping
+    http_status: 200
+  - url: https://nap.launchmetrics.com/medias/v1/ping
+    http_status: 200
+  - url: https://nap.launchmetrics.com/auditLogs/v1/ping
+    http_status: 404
+    note: >-
+      Documented base path, but the live liveness probe 404s — either the service is retired or it is
+      served on a different path than the reference publishes.
+deprecated_operations: []
+changelog:
+  url: null
+  note: No dated API changelog or release notes page was found. See changelog/launchmetrics-changelog.yml.

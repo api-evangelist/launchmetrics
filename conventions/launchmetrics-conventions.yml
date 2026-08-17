@@ -1,0 +1,134 @@
+generated: '2026-08-17'
+method: searched
+source: https://nap.launchmetrics.com/docs
+note: >-
+  Cross-cutting request/response semantics for the Launchmetrics NAP APIs, transcribed from the public
+  reference at nap.launchmetrics.com/docs and confirmed against live unauthenticated probes of the
+  /ping health operations on 2026-08-17. There is no OpenAPI to derive from, so nothing here is
+  inferred from a spec.
+authentication:
+  style: query-parameter api key, optionally HMAC-SHA1 request signature
+  detail: authentication/launchmetrics-authentication.yml
+envelope:
+  style: wrapped
+  description: >-
+    Every response is a JSON object wrapping the payload. Success carries status, time, request
+    (method, path, parameters) and response. Failure replaces response with error (code, message).
+  content_type: application/json; charset=utf-8
+  success_shape:
+    status: '200'
+    time: '0.2'
+    request:
+      method: GET
+      path: /ping
+      parameters: {}
+    response: {}
+  error_shape:
+    status: '404'
+    time: '0.2'
+    request:
+      method: GET
+      path: /ping
+      parameters: {}
+    error:
+      code: WRONG_PARAMETERS
+      message: The email parameter is mandatory
+  observed:
+    probe: GET https://nap.launchmetrics.com/documents/v1/ping
+    http_status: 200
+    body: '{"request":{"method":"GET","path":"/documents/v1/ping"},"response":{"pong":"ok"},"status":200,"time":0.00223}'
+pagination:
+  style: offset-limit
+  params:
+  - name: start
+    description: Zero-based offset of the first result to return.
+  - name: limit
+    description: Maximum number of results to return.
+  - name: limit_facets
+    description: Maximum number of facet buckets to return (Search API only).
+  response_fields: null
+  cursor: false
+  note: >-
+    No cursor/keyset paging, no Link header, and the docs do not publish a maximum page size or a deep
+    paging ceiling.
+query_language:
+  style: lucene
+  description: >-
+    The Search API query and filter parameters accept Lucene syntax including AND, OR, NOT (- is
+    equivalent to NOT, + to AND). Spaces inside filter are treated as AND; OR must be explicit. The
+    docs disclose that special characters such as & and # are not tokenized, so "ernest&young" is
+    indexed and searched as ["ernest","young"].
+  source: https://nap.launchmetrics.com/docs/search.html
+date_handling:
+  params:
+  - period
+  - begin_date
+  - end_date
+  format: ISO 8601 with trailing Z for UTC or an explicit UTC offset
+  rule: period is mutually exclusive with begin_date/end_date; default period is last_month.
+response_shaping:
+  params:
+  - name: response_type
+    description: Selects the shape/verbosity of the returned document or media payload.
+  - name: highlight
+    description: Returns query-term highlighting on retrieved documents (Documents API).
+  - name: debug
+    description: Returns diagnostic detail about the executed query (Search API).
+  - name: aggs
+    description: Requests additional aggregations on the facets endpoint (Search API).
+  sparse_fields: false
+  expansion: false
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No idempotency key, no request-deduplication contract and no retry-safety guidance appear anywhere
+    in the published reference. The write surface is limited to POST search/retrieval operations that
+    are read-like in effect. No Idempotency pointer is emitted for this provider.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No X-Request-Id or correlation header is documented, and none was returned on the live /ping
+    probes. The response envelope echoes the request method, path and parameters, which is the only
+    correlation aid published.
+versioning:
+  scheme: uri-path
+  detail: >-
+    Every NAP service carries a /v[:version] path segment. v0 is the testing environment and requires
+    no authentication (and is disabled in production); v1 is the authenticated production version.
+    Documents additionally ships a v2 on its own base path, running alongside v1.
+  current:
+  - https://nap.launchmetrics.com/search/v1
+  - https://nap.launchmetrics.com/documents/v1
+  - https://nap.launchmetrics.com/documents/v2
+  - https://nap.launchmetrics.com/medias/v1
+  - https://nap.launchmetrics.com/auditLogs/v1
+  detail_artifact: lifecycle/launchmetrics-lifecycle.yml
+errors:
+  format: proprietary envelope (not RFC 9457 application/problem+json)
+  fields:
+  - error.code
+  - error.message
+  - status
+  - request
+  detail_artifact: errors/launchmetrics-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: null
+  note: >-
+    No rate-limit headers, quotas or 429 handling are documented, and none were returned on live
+    probes. See rate-limits/launchmetrics-rate-limits.yml.
+health_and_telemetry:
+  note: >-
+    Every NAP service publishes two standard operations for monitoring — GET /ping (liveness) and GET
+    /stats (per-operation call counts, status-code breakdown and latency statistics over the last 24
+    hours). Both answered unauthenticated on the live probe.
+  operations:
+  - GET /ping
+  - GET /stats
+cross_links:
+  authentication: authentication/launchmetrics-authentication.yml
+  errors: errors/launchmetrics-problem-types.yml
+  lifecycle: lifecycle/launchmetrics-lifecycle.yml
+  rate_limits: rate-limits/launchmetrics-rate-limits.yml
+  sandbox: sandbox/launchmetrics-sandbox.yml

@@ -1,0 +1,95 @@
+generated: '2026-08-17'
+method: derived
+status: candidate
+source: https://nap.launchmetrics.com/docs
+note: >-
+  Launchmetrics ships no MCP server. The tool list below is a CANDIDATE derived from the operations
+  published in the public NAP reference — one tool per documented operation — so an agent builder can
+  see what a server would cover. It is not a Launchmetrics product and nothing here is callable as an
+  MCP tool today. No endpoint URL is asserted.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+discovery:
+  probed: '2026-08-17'
+  results:
+  - url: https://mcp.launchmetrics.com/mcp
+    method: POST tools/list
+    result: DNS does not resolve
+  - url: https://nap.launchmetrics.com/mcp
+    method: POST tools/list
+    http_status: 404
+  - url: https://api-ter.launchmetrics.com/mcp
+    method: POST tools/list
+    http_status: 404
+  registries_searched:
+  - npm (@modelcontextprotocol and vendor namespaces) — no Launchmetrics server
+  - GitHub org github.com/launchmetrics — no MCP repository
+server: null
+authentication_if_built:
+  scheme: app_id query parameter, optionally app_id + HMAC-SHA1 signature
+  detail: authentication/launchmetrics-authentication.yml
+  note: >-
+    A server would have to hold the app secret and compute the HMAC-SHA1 signature per request; there
+    is no OAuth flow an MCP client could delegate to.
+tools:
+- name: search_documents
+  description: Search Launchmetrics publications with a Lucene-syntax query, filters and paging.
+  source_operation: GET https://nap.launchmetrics.com/search/v1/documents
+  source_doc: https://nap.launchmetrics.com/docs/search.html
+- name: search_document_facets
+  description: Return faceted aggregations over a Launchmetrics publication search.
+  source_operation: GET https://nap.launchmetrics.com/search/v1/documents/facets
+  source_doc: https://nap.launchmetrics.com/docs/search.html
+- name: get_documents
+  description: Retrieve one or more publication documents by id.
+  source_operation: GET https://nap.launchmetrics.com/documents/v1/documents/{ids}
+  source_doc: https://nap.launchmetrics.com/docs/documents.html
+- name: get_documents_v2
+  description: Retrieve one or more publication documents by id using the v2 service.
+  source_operation: GET https://nap.launchmetrics.com/documents/v2/documents/{ids}
+  source_doc: https://nap.launchmetrics.com/docs/documentsV2.html
+- name: social_media_search
+  description: Resolve a social media URL to its indexed Launchmetrics document.
+  source_operation: GET https://nap.launchmetrics.com/documents/v1/socialMediaSearch
+  source_doc: https://nap.launchmetrics.com/docs/documents.html
+- name: url_check
+  description: Validate and classify a URL against the Launchmetrics index.
+  source_operation: GET https://nap.launchmetrics.com/documents/v1/urlCheck
+  source_doc: https://nap.launchmetrics.com/docs/documents.html
+- name: get_document_image
+  description: Retrieve the image associated with a publication document.
+  source_operation: GET https://nap.launchmetrics.com/documents/v1/image/{documentId}
+  source_doc: https://nap.launchmetrics.com/docs/documents.html
+- name: get_medias
+  description: Retrieve one or more media outlets by id.
+  source_operation: GET https://nap.launchmetrics.com/medias/v1/medias/{ids}
+  source_doc: https://nap.launchmetrics.com/docs/medias.html
+- name: search_online_medias
+  description: Search the online media-outlet corpus by query.
+  source_operation: GET https://nap.launchmetrics.com/medias/v1/medias/search
+  source_doc: https://nap.launchmetrics.com/docs/medias.html
+- name: search_print_medias
+  description: Search the print media-outlet corpus by query.
+  source_operation: GET https://nap.launchmetrics.com/medias/v1/medias/print/search
+  source_doc: https://nap.launchmetrics.com/docs/medias.html
+- name: get_audit_logs
+  description: Retrieve audit log entries scoped by team, group and object id.
+  source_operation: GET https://nap.launchmetrics.com/auditLogs/v1/auditlogs/{team}{group}{id}
+  source_doc: https://nap.launchmetrics.com/docs/auditlogs.html
+  note: The documented /ping for this service returned 404 on 2026-08-17; treat as unverified.
+tool_count: 11
+input_schemas:
+  available: false
+  note: >-
+    Real input schemas cannot be derived: Launchmetrics publishes no OpenAPI, so there are no
+    machine-readable parameter definitions to inherit. Parameter names are listed in the HTML
+    reference as prose (query, filter, period, begin_date, end_date, sort, start, limit, limit_facets,
+    channel_type_id_filter, topic_paths_filter, language_id_filter, country_path_filter,
+    key_phrases_filter, response_type, debug, aggs, highlight, type, ids, url) but without types,
+    formats or requiredness. No tool-crosswalk artifact is emitted, because a crosswalk requires
+    operationIds from a real spec on one side and published tools on the other, and neither exists.

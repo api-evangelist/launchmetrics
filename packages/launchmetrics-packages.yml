@@ -1,0 +1,81 @@
+generated: '2026-08-17'
+method: searched
+source: registry searches, 2026-08-17
+note: >-
+  No first-party Launchmetrics client library exists on any public package registry. This is a
+  recorded absence, not an unchecked field: every registry below was queried unauthenticated on
+  2026-08-17 and the result recorded. The NAP reference at nap.launchmetrics.com/docs mentions a
+  "helper library" in passing ("if you're not using a helper library, you should url encode all keys
+  and values") but never names, links or publishes one. No SDKs pointer is emitted in apis.yml.
+packages: []
+package_count: 0
+registries_searched:
+- registry: npm
+  endpoint: https://registry.npmjs.org/-/v1/search?text=launchmetrics
+  results: 0
+  version: null
+  published: null
+- registry: npm
+  endpoint: https://registry.npmjs.org/-/v1/search?text=fashiongps
+  results: 0
+  version: null
+  published: null
+  note: Searched the pre-acquisition Fashion GPS brand as well.
+- registry: pypi
+  endpoint: https://pypi.org/pypi/launchmetrics/json
+  status: 404
+  version: null
+  published: null
+- registry: pypi
+  endpoint: https://pypi.org/pypi/launchmetrics-api/json
+  status: 404
+  version: null
+  published: null
+- registry: rubygems
+  endpoint: https://rubygems.org/api/v1/search.json?query=launchmetrics
+  results: 0
+  version: null
+  published: null
+- registry: packagist
+  endpoint: https://packagist.org/search.json?q=launchmetrics
+  results: 0
+  version: null
+  published: null
+- registry: maven-central
+  results: 0
+  version: null
+  published: null
+- registry: nuget
+  results: 0
+  version: null
+  published: null
+- registry: crates.io
+  results: 0
+  version: null
+  published: null
+- registry: pkg.go.dev
+  results: 0
+  version: null
+  published: null
+github_organization:
+  url: https://github.com/launchmetrics
+  http_status: 200
+  first_party: true
+  ships_client_library: false
+  public_repositories:
+  - name: passport-saml
+    note: Fork of a third-party SAML 2.0 Passport strategy.
+  - name: webcomponentsjs
+    note: Fork of the Web Components polyfill suite.
+  - name: react-image
+    note: Fork of a React <img> fallback/loader component.
+  - name: github-action-slack-notify-build
+    note: Fork of a GitHub Action that reports build status to Slack.
+  - name: LM-DIG-pyworker
+    note: Vast serverless Python worker agent — internal ML infrastructure, not an API client.
+  - name: claude-code-usage
+    note: Internal tool for monitoring Claude Code token usage and cost.
+  summary: >-
+    The organisation is real and first-party (website www.launchmetrics.com; offices Paris, Girona,
+    Craiova, New York) but publishes only forks of third-party libraries and internal tooling. Nothing
+    in it wraps the NAP APIs.

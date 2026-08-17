@@ -1,0 +1,49 @@
+generated: '2026-08-17'
+method: searched
+source: https://nap.launchmetrics.com/docs/documents.html
+note: >-
+  Launchmetrics documents a test-vs-production separation on every NAP service page. It is expressed
+  as a version segment rather than as a separate host or a test key prefix, and the provider states
+  plainly that the environment is not continuously available. No test credentials, fixtures, magic
+  identifiers or simulation values are published; nothing below is invented.
+test_live_separation:
+  mechanism: uri-path version segment
+  test:
+    version: v0
+    authentication: none
+    quote: v0 For testing environments, no authentication is required and it's disabled on production
+    availability: >-
+      "The testing environment is not up 24/7, so some calls to the testing urls may return 404" —
+      published verbatim on the Documents, Documents v2, Medias, Search and Auditlogs pages.
+  live:
+    version: v1
+    authentication: required (app_id, optionally app_id + HMAC-SHA1 signature)
+    quote: v1 Production version, authentication required
+  probed:
+    date: '2026-08-17'
+    results:
+    - url: https://nap.launchmetrics.com/documents/v0/ping
+      http_status: 404
+    - url: https://nap.launchmetrics.com/medias/v0/ping
+      http_status: 404
+    - url: https://nap.launchmetrics.com/search/v0/ping
+      http_status: 404
+    - url: https://nap.launchmetrics.com/documents/v1/ping
+      http_status: 200
+    note: >-
+      Every v0 route returned 404 at probe time, which matches the provider's own statement that the
+      test environment is not always up. A developer cannot rely on it being reachable.
+test_credentials: []
+test_values: []
+test_clock: false
+fixtures: false
+triggers: false
+console:
+  url: null
+  note: >-
+    No API console, playground or "try it" surface is published. The reference at
+    nap.launchmetrics.com/docs is static HTML with example URIs and response bodies only.
+gaps:
+- No sandbox tenant, no test app_id, and no self-service way to obtain either.
+- The test environment has no availability commitment and 404d on every probe.
+- No seeded test data or simulation values are published.

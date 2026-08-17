@@ -1,0 +1,74 @@
+generated: '2026-08-17'
+method: searched
+source: https://nap.launchmetrics.com/docs
+format: proprietary
+note: >-
+  Launchmetrics does not use RFC 9457 application/problem+json. Every NAP service returns a wrapped
+  JSON envelope whose error member carries a machine-readable code and a human message. The generic
+  codes below are published on the "Generic Error codes" section of every service page; the remainder
+  were observed live on 2026-08-17 against nap.launchmetrics.com and api-ter.launchmetrics.com, with
+  the status returned recorded verbatim. Each service page also carries a "Custom error codes" heading,
+  but Launchmetrics has left those sections empty in the published reference — a real documentation
+  gap, not an absence of custom codes.
+envelope:
+  content_type: application/json; charset=utf-8
+  fields:
+    status: HTTP status repeated in the body
+    time: server-side processing time in seconds
+    request: echo of the method, path and parameters
+    error.code: machine-readable error code
+    error.message: human-readable message
+problems:
+- code: MISSING_PARAMETERS
+  status: 400
+  title: Some error with the API parameters
+  method: searched
+  source: https://nap.launchmetrics.com/docs/search.html
+  scope: generic — documented on every NAP service
+- code: INTERNAL_ERROR
+  status: 500
+  title: Unexpected API error
+  method: searched
+  source: https://nap.launchmetrics.com/docs/search.html
+  scope: generic — documented on every NAP service
+- code: WRONG_PARAMETERS
+  status: 404
+  title: A required parameter was absent or invalid
+  method: searched
+  source: https://nap.launchmetrics.com/docs/documents.html
+  note: >-
+    Published as the worked example of the error envelope ("The email parameter is mandatory"), and
+    notable because a parameter-validation failure is illustrated with HTTP 404 rather than 400.
+- code: PAGE_NOT_FOUND
+  status: 404
+  title: Page not found
+  method: probed
+  source: GET https://nap.launchmetrics.com/documents/v0/ping
+  observed: '2026-08-17'
+- code: APP_ID_NOT_VALID
+  status: 401
+  title: The app_id is not valid
+  method: probed
+  source: GET https://api-ter.launchmetrics.com/v1/openapi.json
+  observed: '2026-08-17'
+  remediation: Supply a valid app_id issued by Launchmetrics R&D; see authentication/.
+- code: MISSING_TENANT
+  status: 400
+  title: Tenant parameter required
+  method: probed
+  source: GET https://api-ter.launchmetrics.com/v0/openapi.json
+  observed: '2026-08-17'
+  remediation: Supply the tenant parameter on api-ter routes.
+- code: AUTHENTICATION_ERROR
+  status: 401
+  title: Authentication error
+  method: probed
+  source: GET https://discover-app.launchmetrics.com/
+  observed: '2026-08-17'
+  note: >-
+    Returned by the Discover application backend, which is a customer-app surface rather than part of
+    the documented NAP reference. Recorded for completeness of the observed error vocabulary.
+gaps:
+- The "Custom error codes" section is present but empty on all five documented services.
+- No 429 / rate-limit-exceeded code is documented or was observed.
+- No error type URIs, no documentation links per code, and no remediation guidance in the reference.

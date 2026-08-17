@@ -1,0 +1,32 @@
+# Launchmetrics
+
+Append `.md` to the jobs list or any individual job URL for a markdown version (for example https://careers.launchmetrics.com/jobs.md).
+
+## Open positions
+
+- [All open positions](https://careers.launchmetrics.com/jobs): Browse every currently open job. Also available as markdown at https://careers.launchmetrics.com/jobs.md and as a JSON Feed with embedded JobPosting data at https://careers.launchmetrics.com/jobs.json.
+- [Data Check Operator](https://careers.launchmetrics.com/jobs/8173656-data-check-operator): Data Operations · Timișoara · Hybrid
+- [Full Stack Software Development Engineer React / Node.js](https://careers.launchmetrics.com/jobs/8102801-full-stack-software-development-engineer-react-node-js): Tech & Engineering · Girona · Remote
+- [Senior Product Builder](https://careers.launchmetrics.com/jobs/8082446-senior-product-builder): Product · Paris · Remote
+- [Associate Product Builder](https://careers.launchmetrics.com/jobs/8082265-associate-product-builder): Product · Paris · Remote
+- [Data Engineer](https://careers.launchmetrics.com/jobs/8073258-data-engineer): Tech & Engineering · Girona · Remote
+- [Full Stack Software Development Engineer PHP/React](https://careers.launchmetrics.com/jobs/8072383-full-stack-software-development-engineer-php-react): Tech & Engineering · Craiova  · Remote
+- [Brand Insights Manager - Great China](https://careers.launchmetrics.com/jobs/8042613-brand-insights-manager-great-china): Post-Sales · Hong Kong · Hybrid
+- [Associate Solutions Consultant (Temporary Contract)](https://careers.launchmetrics.com/jobs/7951843-associate-solutions-consultant-temporary-contract): Post-Sales · Madrid · Remote
+- [Content & Social Media Associate Director](https://careers.launchmetrics.com/jobs/7904054-content-social-media-associate-director): Marketing · London · Remote
+
+## Key pages
+
+- [Candidate Guide](https://careers.launchmetrics.com/pages/candidate-guide)
+
+## Optional
+
+- [People](https://careers.launchmetrics.com/people): The team behind Launchmetrics.
+- [Departments](https://careers.launchmetrics.com/departments): Our departments.
+- [Locations](https://careers.launchmetrics.com/locations): Office locations.
+- [Posts](https://careers.launchmetrics.com/posts): Posts and updates from Launchmetrics.
+- [Team stories](https://careers.launchmetrics.com/stories): Stories from people who work at Launchmetrics.
+- [Privacy policy](https://careers.launchmetrics.com/privacy-policy): How candidate data is handled.
+- [Cookie policy](https://careers.launchmetrics.com/cookie-policy): Cookie usage and consent.
+- [Data privacy](https://careers.launchmetrics.com/data-privacy): Data privacy controls and rights.
+- [API catalog](https://careers.launchmetrics.com/.well-known/api-catalog): Machine-readable discovery document for available APIs.
