@@ -21,6 +21,20 @@ created: '2026-08-17'
 modified: '2026-08-17'
 tags:
 - Company
+- Software-as-a-Service
+- Marketing
+- Public Relations
+- Media Monitoring
+- Social-Media
+- Analytics
+- Fashion
+- Luxury
+- Beauty
+- Brand Performance
+- Event Management
+- Search
+tags_raw:
+- Company
 - SaaS
 - Marketing
 - Public Relations
@@ -62,6 +76,10 @@ apis:
   humanURL: https://nap.launchmetrics.com/docs/documents.html
   baseURL: https://nap.launchmetrics.com/documents/v1
   tags:
+  - Documents
+  - Media Monitoring
+  - Social-Media
+  tags_raw:
   - Documents
   - Media Monitoring
   - Social Media
