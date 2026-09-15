@@ -1,15 +1,15 @@
 aid: launchmetrics
 name: Launchmetrics
-description: 'Launchmetrics is the Brand Performance Cloud for the fashion, luxury and beauty (FLB)
-  industries, formed from Fashion GPS and Augure and headquartered in Paris and New York. Its SaaS
-  platform bundles Discover (PR and social media monitoring), Insights (brand performance benchmarking
-  and Media Impact Value), Samples (product sample tracking and logistics), Events (event, RSVP and
-  seating management), Contacts (contact and mailing management) and Spotlight (visual asset galleries).
-  Launchmetrics publishes a small, public REST API reference at nap.launchmetrics.com/docs covering five
-  services — Search, Documents, Documents v2, Medias and Auditlogs — that expose the publication,
-  media-outlet and audit-log data behind Discover and Insights. Requests are authenticated with an
-  app_id issued by Launchmetrics R&D, optionally strengthened with an HMAC-SHA1 request signature. A
-  separate Events API is marketed as a CRM connector but is sales-gated with no public reference.'
+description: Launchmetrics is the Brand Performance Cloud for the fashion, luxury and beauty (FLB) industries,
+  formed from Fashion GPS and Augure and headquartered in Paris and New York. Its SaaS platform bundles
+  Discover (PR and social media monitoring), Insights (brand performance benchmarking and Media Impact
+  Value), Samples (product sample tracking and logistics), Events (event, RSVP and seating management),
+  Contacts (contact and mailing management) and Spotlight (visual asset galleries). Launchmetrics publishes
+  a small, public REST API reference at nap.launchmetrics.com/docs covering five services — Search, Documents,
+  Documents v2, Medias and Auditlogs — that expose the publication, media-outlet and audit-log data behind
+  Discover and Insights. Requests are authenticated with an app_id issued by Launchmetrics R&D, optionally
+  strengthened with an HMAC-SHA1 request signature. A separate Events API is marketed as a CRM connector
+  but is sales-gated with no public reference.
 url: https://raw.githubusercontent.com/api-evangelist/launchmetrics/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -74,13 +74,13 @@ tags_raw:
 - Event Management
 - Search
 apis:
-- aid: launchmetrics-search
+- aid: launchmetrics:launchmetrics-search
   name: Launchmetrics Search API
-  description: 'Search API for Launchmetrics publications. GET/POST /documents runs a Lucene-syntax
-    query across the indexed publication corpus with filters for period, channel type, topic path,
-    language, country and key phrases, plus offset/limit paging (start, limit). GET/POST
-    /documents/facets returns faceted aggregations over the same query. /ping and /stats are the
-    standard NAP health and usage-statistics operations.'
+  description: Search API for Launchmetrics publications. GET/POST /documents runs a Lucene-syntax query
+    across the indexed publication corpus with filters for period, channel type, topic path, language,
+    country and key phrases, plus offset/limit paging (start, limit). GET/POST /documents/facets returns
+    faceted aggregations over the same query. /ping and /stats are the standard NAP health and usage-statistics
+    operations.
   humanURL: https://nap.launchmetrics.com/docs/search.html
   baseURL: https://nap.launchmetrics.com/search/v1
   tags:
@@ -92,13 +92,13 @@ apis:
     url: https://nap.launchmetrics.com/docs/search.html
   - type: Documentation
     url: https://nap.launchmetrics.com/docs
-- aid: launchmetrics-documents
+- aid: launchmetrics:launchmetrics-documents
   name: Launchmetrics Documents API
-  description: 'Document retrieval API. GET/POST /documents/{ids} returns full publication documents by
+  description: Document retrieval API. GET/POST /documents/{ids} returns full publication documents by
     id with optional response_type and highlight controls; /socialMediaSearch resolves a social media
-    URL to its document; /urlCheck validates and classifies a URL; /image/{documentId} returns the
-    document image. Documents sourced from the Search API influencers endpoint are served from an
-    Amazon-backed cache.'
+    URL to its document; /urlCheck validates and classifies a URL; /image/{documentId} returns the document
+    image. Documents sourced from the Search API influencers endpoint are served from an Amazon-backed
+    cache.
   humanURL: https://nap.launchmetrics.com/docs/documents.html
   baseURL: https://nap.launchmetrics.com/documents/v1
   tags:
@@ -114,12 +114,11 @@ apis:
     url: https://nap.launchmetrics.com/docs/documents.html
   - type: Documentation
     url: https://nap.launchmetrics.com/docs
-- aid: launchmetrics-documents-v2
+- aid: launchmetrics:launchmetrics-documents-v2
   name: Launchmetrics Documents v2 API
-  description: 'Version 2 of the Launchmetrics document retrieval API, served on its own URI-path
-    version. GET /documents/{ids} and POST /documents retrieve publication documents by identifier.
-    Shares the NAP envelope, app_id + HMAC-SHA1 signature authentication and generic error codes with
-    the v1 service.'
+  description: Version 2 of the Launchmetrics document retrieval API, served on its own URI-path version.
+    GET /documents/{ids} and POST /documents retrieve publication documents by identifier. Shares the
+    NAP envelope, app_id + HMAC-SHA1 signature authentication and generic error codes with the v1 service.
   humanURL: https://nap.launchmetrics.com/docs/documentsV2.html
   baseURL: https://nap.launchmetrics.com/documents/v2
   tags:
@@ -130,12 +129,12 @@ apis:
     url: https://nap.launchmetrics.com/docs/documentsV2.html
   - type: Documentation
     url: https://nap.launchmetrics.com/docs
-- aid: launchmetrics-medias
+- aid: launchmetrics:launchmetrics-medias
   name: Launchmetrics Medias API
-  description: 'Media-outlet API. GET/POST /medias/{ids} retrieves online media outlets by id;
-    /medias/search searches online media by query with response_type and limit; /medias/print/search
-    searches the print media corpus. /ping and /stats provide health and usage statistics. This is the
-    outlet-level companion to the document-level Search and Documents APIs.'
+  description: Media-outlet API. GET/POST /medias/{ids} retrieves online media outlets by id; /medias/search
+    searches online media by query with response_type and limit; /medias/print/search searches the print
+    media corpus. /ping and /stats provide health and usage statistics. This is the outlet-level companion
+    to the document-level Search and Documents APIs.
   humanURL: https://nap.launchmetrics.com/docs/medias.html
   baseURL: https://nap.launchmetrics.com/medias/v1
   tags:
@@ -147,12 +146,12 @@ apis:
     url: https://nap.launchmetrics.com/docs/medias.html
   - type: Documentation
     url: https://nap.launchmetrics.com/docs
-- aid: launchmetrics-auditlogs
+- aid: launchmetrics:launchmetrics-auditlogs
   name: Launchmetrics Auditlogs API
-  description: 'Audit log API. GET /auditlogs/{team}{group}{id} returns audit log entries scoped by
-    team, group and object id with type, limit and sort parameters, alongside the standard /ping and
-    /stats health operations. Documented at nap.launchmetrics.com/docs/auditlogs.html; the v1 /ping
-    probe returned HTTP 404 on 2026-08-17, so the documented base path may not currently be deployed.'
+  description: Audit log API. GET /auditlogs/{team}{group}{id} returns audit log entries scoped by team,
+    group and object id with type, limit and sort parameters, alongside the standard /ping and /stats
+    health operations. Documented at nap.launchmetrics.com/docs/auditlogs.html; the v1 /ping probe returned
+    HTTP 404 on 2026-08-17, so the documented base path may not currently be deployed.
   humanURL: https://nap.launchmetrics.com/docs/auditlogs.html
   baseURL: https://nap.launchmetrics.com/auditLogs/v1
   tags:
@@ -226,4 +225,3 @@ x-enrichment:
   status: enriched
   artifacts_added: 18
   pass: local-v1
-
