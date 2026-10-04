@@ -51,7 +51,7 @@ tags:
 - Marketing
 - Public Relations
 - Media Monitoring
-- Social-Media
+- Social Media
 - Analytics
 - Fashion
 - Luxury
@@ -73,6 +73,7 @@ tags_raw:
 - Brand Performance
 - Event Management
 - Search
+- Social-Media
 apis:
 - aid: launchmetrics:launchmetrics-search
   name: Launchmetrics Search API
@@ -104,11 +105,12 @@ apis:
   tags:
   - Documents
   - Media Monitoring
-  - Social-Media
+  - Social Media
   tags_raw:
   - Documents
   - Media Monitoring
   - Social Media
+  - Social-Media
   properties:
   - type: APIReference
     url: https://nap.launchmetrics.com/docs/documents.html
