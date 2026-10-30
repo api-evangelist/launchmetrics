@@ -64,6 +64,116 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Launchmetrics is a company surfaced as a portfolio company of serena and added to the API Evangelist network as a stub for enrichment. Sector: saas. This profile is a lead awaiting the enrichment pipeline.
+Launchmetrics is the Brand Performance Cloud for the fashion, luxury and beauty (FLB) industries, formed from Fashion GPS and Augure and headquartered in Paris and New York. Its SaaS platform bundles Discover (PR and social media monitoring), Insights (brand performance benchmarking and Media Impact Value), Samples (product sample tracking and logistics), Events (event, RSVP and seating management), Contacts (contact and mailing management) and Spotlight (visual asset galleries). Launchmetrics publishes a small, public REST API reference at nap.launchmetrics.com/docs covering five services — Search, Documents, Documents v2, Medias and Auditlogs — that expose the publication, media-outlet and audit-log data behind Discover and Insights. Requests are authenticated with an app_id issued by Launchmetrics R&D, optionally strengthened with an HMAC-SHA1 request signature. A separate Events API is marketed as a CRM connector but is sales-gated with no public reference.
 
-Source: portfolio company of [serena](https://github.com/api-evangelist/serena) — https://launchmetrics.com/
+**Areas:** Company · Software-as-a-Service · Marketing · Public Relations · Media Monitoring · Social Media · Analytics · Fashion · Luxury · Beauty · Brand Performance · Event Management
+
+## Launchmetrics on APIs.io
+
+Everything profiled for Launchmetrics is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/launchmetrics/](https://apis.io/providers/launchmetrics/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [Launchmetrics Search API](https://apis.io/apis/launchmetrics/launchmetrics-search/) — Search API for Launchmetrics publications. GET/POST /documents runs a Lucene-syntax query across the indexed publication corpus with filters for period,…
+- [Launchmetrics Documents API](https://apis.io/apis/launchmetrics/launchmetrics-documents/) — Document retrieval API. GET/POST /documents/{ids} returns full publication documents by id with optional response_type and highlight controls;…
+- [Launchmetrics Documents v2 API](https://apis.io/apis/launchmetrics/launchmetrics-documents-v2/) — Version 2 of the Launchmetrics document retrieval API, served on its own URI-path version. GET /documents/{ids} and POST /documents retrieve publication…
+- [Launchmetrics Medias API](https://apis.io/apis/launchmetrics/launchmetrics-medias/) — Media-outlet API. GET/POST /medias/{ids} retrieves online media outlets by id; /medias/search searches online media by query with response_type and limit;…
+- [Launchmetrics Auditlogs API](https://apis.io/apis/launchmetrics/launchmetrics-auditlogs/) — Audit log API. GET /auditlogs/{team}{group}{id} returns audit log entries scoped by team, group and object id with type, limit and sort parameters,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [launchmetrics-mcp.yml](https://apis.io/servers/launchmetrics/launchmetrics-mcp-yml/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Launchmetrics Authentication](https://apis.io/security/launchmetrics/launchmetrics-authentication/)
+- [Launchmetrics Domain Security](https://apis.io/security/launchmetrics/launchmetrics-domain-security/)
+- [Launchmetrics Vulnerability Disclosure](https://apis.io/security/launchmetrics/launchmetrics-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Launchmetrics Plans Pricing](https://apis.io/plans/launchmetrics/launchmetrics-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Launchmetrics Rate Limits](https://apis.io/rate-limits/launchmetrics/launchmetrics-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://launchmetrics.com/)
+- [Documentation](https://nap.launchmetrics.com/docs)
+- [API reference](https://nap.launchmetrics.com/docs)
+- [Pricing](https://www.launchmetrics.com/launchmetrics-pricing-solutions)
+- [Support](https://help.launchmetrics.com/contact-us)
+- [Blog](https://www.launchmetrics.com/resources/blog)
+- [Terms of service](https://connect.launchmetrics.com/Home/en/GeneralTerms)
+- [Privacy policy](https://www.launchmetrics.com/en/product-portal-privacy-policy)
+- [GitHub](https://github.com/launchmetrics)
+- [Status](https://status.launchmetrics.com/)
+
+## API Evangelist rating
+
+**Kin Score 22.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 40.5 |
+| Access clarity | 17.1 |
+
+**Agent readiness 10.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/launchmetrics/](https://apis.io/providers/launchmetrics/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Launchmetrics: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/launchmetrics/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
